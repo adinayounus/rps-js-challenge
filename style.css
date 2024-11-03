@@ -1,0 +1,71 @@
+body {
+    background-image: url(/background.jpg);
+    color: white;
+    /* margin: 0;
+    padding: 0;
+    width: auto; */
+    font-family: 'pixelify sans', monospace, Arial, Helvetica, sans-serif;
+}
+
+.all-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+/* .main-content {
+} */
+
+.game-buttons {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    border: none;
+}
+
+.rock, .paper, .scissors {
+    border-radius: 100px;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.557);
+}
+
+.rock img, .paper img, .scissors img {
+    height: 150px; 
+    width: 150px;
+    padding: 10px;
+}
+
+.scissors img {
+    height: 150px;
+    width: 150px;
+}
+
+.score-tracker {
+    font-size: 18px;
+    overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.557);
+    width: 500px;
+    padding: 10px;
+    margin-left: 80px;
+    border-radius: 7px;
+}
+
+.reset-button {
+    position: relative;
+    width: 400px;
+    height: 40px;
+    margin-top: 150px;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.557);
+}
+
+.reset-button img {
+    width: 100%;
+    height: 100%;
+}
+
+

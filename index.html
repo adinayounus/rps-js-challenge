@@ -4,31 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <title>Rock, Paper, Scissors!</title>
 </head>
 <body>
-    <p>Rock, Paper, Scissors!</p>
+    <!-- header and game part of page -->
+    <main>
+        <div class="all-content">
+            <h1>Rock, Paper, Scissors!</h1>
+            <div class="main-content">
+                <div class="game-buttons">
+                    <button onclick="playGame('rock');" class="rock"><img src="/cobble.png"></button>
+                    <button onclick="playGame('paper');" class="paper"><img src="/Paper.png"></button>
+                    <button onclick="playGame('scissors');" class="scissors"><img src="/shears.png"></button> 
+                </div>
 
-    <button onclick="playGame('rock');">Rock</button>
+                <div class="score-tracker">
+                    <p class="js-score"></p>
+                    <p class="js-result"></p>
+                    <p class="js-moves"></p>
+                </div>
 
-    <button onclick="playGame('paper');">Paper</button>
-
-    <button onclick="playGame('scissors');">Scissors</button> 
-
-    <button onclick="
-    score.wins = 0;
-    score.losses = 0;
-    score.ties = 0;
-    localStorage.removeItem('score');
-    ">Reset</button>
+                <!-- reset button carries function to reset the displayed scoreboard -->
+                <!-- <div id="reset-button"> -->
+                    <button onclick="
+                    score.wins = 0;
+                    score.losses = 0;
+                    score.ties = 0;
+                    localStorage.removeItem('score');
+                    updootScore();" class="reset-button"><img src="/reset.png"></button>
+                <!-- </div> -->
+            </div>
+        </div>
+    </main>
 
     <script>
-
+        // saving score locally so when you refresh it will keep your score
         let score = JSON.parse(localStorage.getItem('score')) || {
                 wins: 0,
                 losses: 0,
                 ties: 0
             };
+
+        updootScore();
 
         // if (!score) {
         //     score = {
@@ -44,46 +64,53 @@
             let result = '';
             if (playerMove === 'scissors') {
                 if (computerPick === 'rock') {
-                    result = 'You Lose';
+                    result = 'Computer wins!';
                 } else if (computerPick === 'paper') {
-                    result = 'You Win';
+                    result = 'You win!';
                 } else if (computerPick === 'scissors') {
-                    result = 'Tie';
+                    result = "It's a tie!";
                 }
 
             } else if (playerMove === 'paper') {
                 if (computerPick === 'rock') {
                     result = 'You Win';
                 } else if (computerPick === 'paper') {
-                    result = 'Tie';
+                    result = "It's a tie!";
                 } else if (computerPick === 'scissors') {
-                    result = 'You Lose';
+                    result = 'Computer wins!';
                 }
 
             } else if (playerMove === 'rock') {
                 if (computerPick === 'rock') {
-                    result = 'Tie'
+                    result = "It's a tie!"
                 } else if (computerPick === 'paper') {
-                    result = 'You Lose'
+                    result = 'Computer wins!'
                 } else if (computerPick === 'scissors') {
-                    result = 'You Win'
+                    result = 'You win!'
                 }
                 }
 
-                if (result === 'You Win') {
+                if (result === 'You win!') {
                     score.wins += 1;
-                } else if (result === 'You Lose') {
+                } else if (result === 'Computer wins!') {
                     score.losses += 1;
-                } else if (result === 'Tie') {
+                } else if (result === "It's a tie!") {
                     score.ties += 1;
                 }
 
                 localStorage.setItem('score', JSON.stringify(score));
 
-            alert(`You picked ${playerMove}. Computer picked ${computerPick}. ${result}
-            Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
-            }
+                updootScore();
 
+                document.querySelector('.js-result').innerHTML = result;
+
+                document.querySelector('.js-moves').innerHTML = `You chose ${playerMove} - Computer chose ${computerPick}`;
+            }
+            //display score 
+            function updootScore() {
+                document.querySelector('.js-score').innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+            }
+            // function for choosing the "randomness"
         function pickComputerMove() {
             const rockNumber = Math.random();
             let computerPick = '';
@@ -94,6 +121,7 @@
             } else if (rockNumber >= 2 /3 && rockNumber < 1) {
                 computerPick = 'scissors';
             }
+            // return 
             return computerPick;
         }
         //rock beats scissors, paper beats rock, scissors beats paper
